@@ -14,7 +14,7 @@ clock = pygame.time.Clock()
 screen=pygame.display.set_mode((600,400))
 
 #background
-backgroundImg=pygame.image.load('background.jpg')
+backgroundImg=pygame.image.load('images/background.jpg')
 
 #background music
 #mixer.music.load()
@@ -22,7 +22,7 @@ backgroundImg=pygame.image.load('background.jpg')
 
 #Caption and Icon
 pygame.display.set_caption("UFO Shooter")
-icon=pygame.image.load('ufo.png')
+icon=pygame.image.load('images/ufo.png')
 pygame.display.set_icon(icon)
 
 #Fonts
@@ -30,9 +30,9 @@ over_font=pygame.font.Font('freesansbold.ttf',64)
 info=pygame.font.Font('freesansbold.ttf',20)
 
 #ANJ Logo
-AImg=pygame.image.load('a.png')
-NImg=pygame.image.load('n.png')
-JImg=pygame.image.load('j.png')
+AImg=pygame.image.load('images/a.png')
+NImg=pygame.image.load('images/n.png')
+JImg=pygame.image.load('images/j.png')
 
 def anj():
     screen.blit(AImg,  (520,15))
@@ -44,7 +44,7 @@ def anj():
 def intro():
     screen.blit(backgroundImg,  (0,0))
         
-    screen.blit(pygame.image.load('ufo_boss.png'), (40,50))
+    screen.blit(pygame.image.load('images/ufo_boss.png'), (40,50))
    
     Game_name=over_font.render("UFO Shooter", True, (249,224,117))
     screen.blit(Game_name, (120,50))
@@ -94,7 +94,7 @@ score_value=0
 previous_score=0
 
 def get_highscore():
-    with open("HI.txt","r") as f:
+    with open("imp_files/HI.txt","r") as f:
         return f.read()
     f.close()
         
@@ -107,29 +107,23 @@ while play:
     
     
     #background objects
-    sat1=pygame.image.load('planet.png')
+    sat1=pygame.image.load('images/planet.png')
     sat1y=0
 
-    sat2=pygame.image.load('planet2.png')
+    sat2=pygame.image.load('images/planet2.png')
     sat2y=-80*3
 
-    jup=pygame.image.load('jupiter.png')
+    jup=pygame.image.load('images/jupiter.png')
     jupy=-80*2
 
-    nep=pygame.image.load('neptune.png')
+    nep=pygame.image.load('images/neptune.png')
     nepy=-80*5
-
-    sta1=pygame.image.load('favourite.png')
-    star1y=-80
-
-    sta2=pygame.image.load('favourite2.png')
-    star2y=-80*4
 
     move=0.3
 
 
     #player
-    playerImg=pygame.image.load('spaceship.png')
+    playerImg=pygame.image.load('images/spaceship.png')
     plx=252
     ply=330
 
@@ -140,7 +134,7 @@ while play:
     #enemys
     speed_en+=0.3
     
-    enemyImg=[pygame.image.load('ufo_1.png'),pygame.image.load('ufo_2.png'),pygame.image.load('ufo_boss.png')]
+    enemyImg=[pygame.image.load('images/ufo_1.png'),pygame.image.load('images/ufo_2.png'),pygame.image.load('images/ufo_boss.png')]
     enx=[540,10,275]
     eny=[23,10,23]
     enx_change=[0.1+speed_en,0.1+speed_en,0.4+speed_en]
@@ -148,10 +142,10 @@ while play:
     en_hit=[0,0,0]
     
     lives=[5,5,10]
-    lifeImg=pygame.image.load('heart.png')
+    lifeImg=pygame.image.load('images/heart.png')
     
     #Bullet
-    bulletImg=pygame.image.load('bullet.png')
+    bulletImg=pygame.image.load('images/bullet.png')
     bulletx=252
     bullety=330
     bulletx_change=0
@@ -162,7 +156,7 @@ while play:
     #bomb
     speed_bomb+=0.5
     
-    bombImg=[pygame.image.load('dynamite.png'), pygame.image.load('explosive.png'), pygame.image.load('nucleobomb.png')] 
+    bombImg=[pygame.image.load('images/dynamite.png'), pygame.image.load('images/explosive.png'), pygame.image.load('images/nucleobomb.png')] 
     bombx=[enx[0],enx[1], enx[2]]
     bomby=[eny[0],eny[1], eny[2]]
     bomby_change=[0.5+speed_bomb,0.5+speed_bomb,1.5+speed_bomb]
@@ -179,44 +173,50 @@ while play:
 
     #background objects
     def saturn1(y):
-        screen.blit(sat1, (20, y))
+        if game:
+            screen.blit(sat1, (20, y))
     def saturn2(y):
-        screen.blit(sat2, (520, y))
+        if game:
+            screen.blit(sat2, (520, y))
     def jupiter(y):
-        screen.blit(jup, (205, y))
+        if game:
+            screen.blit(jup, (205, y))
     def neptune(y):
-        screen.blit(nep, (300, y))
-    def star1(y):
-        screen.blit(sta1, (395, y))
-    def star2(y):
-        screen.blit(sta2, (105, y))
+        if game:
+            screen.blit(nep, (300, y))
         
 
     def player(x, y):
-        screen.blit(playerImg, (x, y))
+        if game:
+            screen.blit(playerImg, (x, y))
 
         
     def enemies(a, b, c, d):
-        screen.blit(enemyImg[0], (a,b))
-        screen.blit(enemyImg[1], (c,d))
+        if game:
+            screen.blit(enemyImg[0], (a,b))
+            screen.blit(enemyImg[1], (c,d))
 
 
     def boss(x,y):
-        screen.blit(enemyImg[2], (x, y))
+        if game:
+            screen.blit(enemyImg[2], (x, y))
 
 
     def life(x,y):
-        screen.blit(lifeImg, (x, y))
+        if game:
+            screen.blit(lifeImg, (x, y))
 
 
     def fire_bullet(x,y):
         global bullet_state
         bullet_state="fire"
-        screen.blit(bulletImg,(x+16,y+10))
+        if game:
+            screen.blit(bulletImg,(x+16,y+10))
 
 
     def fire_bomb(i,x,y):
-        screen.blit(bombImg[i], (x+16,y+10))
+        if game:
+            screen.blit(bombImg[i], (x+16,y+10))
 
 
     def isCollision(x1,y1,x2,y2):
@@ -229,17 +229,20 @@ while play:
 
     def showScore(x,y):
         score=font.render("Score: " + str(score_value), True, (255,255,255))
-        screen.blit(score,(x,y))
+        if game:
+            screen.blit(score,(x,y))
  
         
     def game_over_text():
         game_over=over_font.render("GAME OVER",  True, (249,224,117))
-        screen.blit(game_over,(115,150))
+        if game:
+            screen.blit(game_over,(115,150))
 
 
     def you_won_text():
         you_won=over_font.render("YOU WON", True, (68,214,44))
-        screen.blit(you_won, (130,100))
+        if game:
+            screen.blit(you_won, (130,100))
         
 
     def pause():
@@ -335,21 +338,9 @@ while play:
         if sat1y>=340+(80*5):
             sat1y=0
 
-        star1y+=move
-        if star1y>=340+(80*4):
-            star1y=-80
-
         jupy+=move
         if jupy>=340+(80*3):
             jupy=-80*2
-
-        sat2y+=move
-        if sat2y>=340+(80*2):
-            sat2y=-80*3
-
-        star2y+=move
-        if star2y>=340+80:
-            star2y=-80*4
 
         nepy+=move
         if nepy>=360:
@@ -445,7 +436,6 @@ while play:
             if en_hit[2]==10:
                 eny[2]=-2000
                 enx[2]=0
-
                 break
                     
             boss(enx[2],eny[2])
@@ -504,7 +494,7 @@ while play:
                 if (high_score<score_value):
                     high_score=score_value
                     
-                with open("HI.txt","w") as f:
+                with open("imp_files/HI.txt","w") as f:
                     f.write(str(high_score))
                 f.close()
                 
@@ -547,10 +537,8 @@ while play:
 
         #calling background objects
         saturn1(sat1y)
-        star1(star1y)
         jupiter(jupy)
         saturn2(sat2y)
-        star2(star2y)
         neptune(nepy)          
         
         player(plx,ply)
